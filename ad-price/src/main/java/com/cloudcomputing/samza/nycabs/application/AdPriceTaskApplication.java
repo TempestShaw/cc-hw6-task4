@@ -38,10 +38,15 @@ public class AdPriceTaskApplication implements TaskApplication {
         // Define your input and output descriptor in here.
         // Reference solution:
         //  https://github.com/apache/samza-hello-samza/blob/master/src/main/java/samza/examples/wikipedia/task/application/WikipediaStatsTaskApplication.java
+        KafkaInputDescriptor<Map<String, Object>> inputDescriptor =
+                kafkaSystemDescriptor.getInputDescriptor("ad-click", new JsonSerde<>());
 
+        KafkaOutputDescriptor<Map<String, Object>> outputDescriptor =
+                kafkaSystemDescriptor.getOutputDescriptor("ad-price", new JsonSerde<>());
         // Bound you descriptor with your taskApplicationDescriptor in here.
         // Please refer to the same link.
-
+        taskApplicationDescriptor.withInputStream(inputDescriptor)
+                .withOutputStream(outputDescriptor);
 
         taskApplicationDescriptor.withTaskFactory((StreamTaskFactory)() -> new AdPriceTask());
     }
