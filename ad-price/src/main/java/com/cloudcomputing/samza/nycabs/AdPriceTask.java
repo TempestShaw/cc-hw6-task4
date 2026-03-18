@@ -1,6 +1,5 @@
 package com.cloudcomputing.samza.nycabs;
 
-import com.google.common.io.Resources;
 import org.apache.samza.context.Context;
 import org.apache.samza.storage.kv.KeyValueStore;
 import org.apache.samza.system.IncomingMessageEnvelope;
